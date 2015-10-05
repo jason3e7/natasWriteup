@@ -1,0 +1,9 @@
+1. passthru("grep -i $key dictionary.txt");
+
+2. NOT path traversal
+
+3. linux command injection
+
+4. ls, pwd, whoami, man...
+
+5. find / -name natas10 !!!
