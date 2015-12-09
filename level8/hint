@@ -1,7 +1,5 @@
+key :
 1. $encodedSecret = "3d3d516343746d4d6d6c315669563362";
-
 2. bin2hex(strrev(base64_encode($secret)));
-
 3. base64_decode(strrev(hex2bin($encodedSecret)))
-
 4. online tool OR simulate
