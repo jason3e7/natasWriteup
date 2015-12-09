@@ -1,0 +1,4 @@
+key :
+1. include "includes/secret.inc";
+2. http://natas6.natas.labs.overthewire.org/includes/secret.inc
+3. $secret = "";
