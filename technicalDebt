@@ -1,2 +1,5 @@
 1. All HTTP Status Code(RFC 2616)
-2. robots.txt
+2. webroot files(robots.txt, .htaccess, ...)
+3. Unix Command Injection Cheat Sheet
+	3.1. PIPEZ: blah ^ blah2
+4. Linux Bash
