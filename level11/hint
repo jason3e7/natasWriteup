@@ -4,5 +4,5 @@ $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
 2. encode OR decode output maybe not string(special char)
 3. Cookie : data = 
 base64_encode(xor_encrypt(json_encode(array("showpassword"=>"yes", "bgcolor"=>"#ffffff"))))
-4. xor_encrypt property
+4. xor_encrypt property (a xor b = c) => (a xor b = c) !?
 5. simulation
