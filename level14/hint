@@ -1,0 +1,4 @@
+key :
+1. SQL injection
+2. SQL comment and special char
+	--, #, /**/
