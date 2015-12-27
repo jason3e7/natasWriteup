@@ -4,7 +4,7 @@ import requests
 import re
 
 username = 'natas15'
-password = 'AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J'
+password = ''
 
 c = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 natas16pw = ''
