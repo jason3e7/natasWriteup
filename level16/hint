@@ -1,0 +1,11 @@
+key :
+1. blind command injection
+2. shellscript : Subshell
+3. grep -i "$(grep a /etc/natas_webpass/natas17)word" dictionary.txt
+	3.1 find a word in dictionary.txt
+	3.2 string add(subshell, word)
+	3.3 if a in /etc/natas_webpass/natas17 return nothing
+	3.4 if a not in /etc/natas_webpass/natas17 return word
+4. $(grep ^password /etc/natas_webpass/natas17)whacked
+	4.1 BF password
+	
