@@ -11,4 +11,4 @@
 8. All file format and structure(fileSignatures)
 9. SQL comment and special char
 10. All Blind SQL injection Type and available Function
-11. SQL : Subquery, ShellScript : Subprocess  
+11. SQL : Subquery, ShellScript : Subprocess(Subshell)
